@@ -1,0 +1,57 @@
+<section class="col-md-6 mx-auto mb-2">
+  <h1 class="text-center mt-2">
+    <img src="assets/images/logo.png" alt="" width="250" />
+  </h1>
+  <p class="text-center text-white">
+    Vous disposez de {{ pokemons.length }} pokemons
+  </p>
+
+  <h1 class="text-center">
+    <img
+      class="img-pokemon"
+      src="assets/images/pok.png"
+      alt=""
+      width="30"
+      *ngFor="let pokemon of pokemons"
+      [title]="pokemon.name"
+    />
+  </h1>
+  <!-- Utilisez les doubles accolades pour afficher le nombre de pokemons -->
+  <div class="card-recherche">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Je recherche ..."
+      #search
+      (keyup)="onSearchPokemon(search.value)"
+    />
+  </div>
+  <div class="btn-group d-flex mt-2 mb-2">
+    <button
+      class="btn btn-dark"
+      *ngFor="let type of pokemonTypes"
+      (click)="onTypeButtonClick(type)"
+    >
+      {{ type }}
+    </button>
+  </div>
+  <div class="row justify-content-center">
+    <div
+      class="myCustomCard col-md-3 m-2"
+      *ngFor="let pokemon of pokemons"
+      (click)="goToSinglePokemon(pokemon.id)"
+    >
+      <div class="p-2 d-flex justify-content-center">
+        <img
+          [src]="pokemon.picture"
+          class="card-img-top"
+          [alt]="pokemon.name"
+          alt=""
+          width="200"
+          title="{{ pokemon.name }}"
+        />
+        <h5 class="card-title">{{ pokemon.name | lowercase }}</h5>
+      </div>
+    </div>
+  </div>
+</section>

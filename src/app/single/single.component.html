@@ -1,0 +1,78 @@
+<section class="container">
+  <div class="row mt-5">
+    <div class="col-md-4 d-flex justify-content-center mt-5">
+      <img [src]="pokemon?.picture" alt="" width="350" />
+    </div>
+    <div class="col-md-8 mt-5">
+      <h1 class="text-center text-white">{{ pokemon?.name }}</h1>
+      <div class="mx-auto text-center mt-5">
+        <h2 class="text-white">HP: {{ pokemon?.hp }}</h2>
+        <h2 class="text-white">Attaque: {{ pokemon?.cp }}</h2>
+        <h2 class="text-white">
+          Type: <span>{{ pokemon?.type }}</span>
+        </h2>
+        <h2 class="text-white">
+          capture: {{ pokemon?.createdAt | date : "dd/MM/y" }}
+        </h2>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-primary" routerLink="/">Retour</button>
+      <button
+        class="btn btn-dark"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Modifier
+      </button>
+      <button
+        class="btn btn-danger"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal2"
+      >
+        Relaché
+      </button>
+    </div>
+  </div>
+</section>
+
+<app-edit [data]="pokemon"></app-edit>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal2"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          {{ pokemon?.name }}
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">Voulez-vous vraiment relacher ce pokemon ?</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          (click)="removePokemon()"
+        >
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

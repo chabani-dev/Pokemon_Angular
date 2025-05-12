@@ -1,1 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  background-image: url(assets/images/pokemon.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.col {
+  border: 2px solid;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 1);
+  transition: all 0.2s ease-in_out;
+}
+img.text-center {
+  width: 40%;
+}
+.justify-content-center {
+  justify-content: center !important;
+  display: flex;
+  flex-wrap: wrap;
+}
+.myCustomCard.col-md-3.m-2 {
+  border: 2px solid #9e9e9e3b;
+  background: #eddbdb7d;
+  border-radius: 9px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.myCustomCard.col-md-3.m-2:hover {
+  transform: scale(1.05); /* Effet de mise à l'échelle au survol */
+}
+.img-pokemon[title] {
+  color: black !important;
+}

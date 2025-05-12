@@ -1,0 +1,69 @@
+import { Component, OnInit } from '@angular/core';
+import { POKEMONS } from '../db/database';
+import { Router } from '@angular/router';
+import { SweetAlertService } from '../services/tools/sweet-alert.service';
+import { ApiRequestService } from '../services/api-request.service';
+ 
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
+export class HomeComponent implements OnInit {
+  listPokemons: any;
+  types: Array<string> = [];
+ 
+  constructor(
+    private router: Router,
+    private sweet: SweetAlertService,
+    private api: ApiRequestService
+  ) { }
+ 
+  // Lorsque la page est chargée ont "execute" la fonction "ngOnInit"
+  ngOnInit(): void {
+    this.getAllPokemons(); // Appel de la fonction de recuperation des pokemons de l'API
+    this.types = this.getTypes();
+  }
+ 
+  // fonction de recherche de pokemon par son "name"
+  onSearchPokemon(search: string) { // l'argument "search" contient le nom du pokemon recherché (partiel ou complet)
+    this.listPokemons = POKEMONS.filter(pokemon => pokemon.name.toLowerCase().includes(search.toLowerCase()));
+    if (this.listPokemons.length == 0) {
+      this.sweet.customAlert('OUPS!!', 'Aucun résultat trouvé', 'warning');
+    }
+  }
+ 
+  // fonction de filtre de pokemon par type
+  onFilterByType(search: string): void {
+    search != 'Tous' ? this.listPokemons = POKEMONS.filter(pokemon => pokemon.type === search) : this.listPokemons = POKEMONS;
+  }
+ 
+  // fonction qui permet de recuperer tout les types de pokemon sans doublons ( afficher un bouton par type dans le html)
+  getTypes(): Array<string> {
+    let types: Array<string> = [];
+    for (const pokemon of POKEMONS) {
+      !types.includes(pokemon.type) ? types.push(pokemon.type) : null;
+    }
+    types.push('Tous');
+    return types;
+  }
+ 
+  // fonction de redi rection vers la page de detail d'un pokemon
+  goToSinglePokemon(id: number): void {
+    this.router.navigate(['/single', id]);
+  }
+ 
+  // fonction de recuperation des pokemons de l'API
+  getAllPokemons() {
+ 
+    this.api.fetchPokemons().subscribe(
+      (res) => {
+        this.listPokemons = res;
+        console.log(this.listPokemons);
+      },
+      (err) => {
+        console.log(err);
+      }
+    )
+  }
+}

@@ -1,0 +1,14 @@
+<h1 class="text-center text-white">Nouveau pokemon</h1>
+<section class="col-md-8 mx-auto mt-5">
+  <label for="">Name</label>
+  <input type="text" class="form-control" [(ngModel)]="newPokemon.name" />
+  <label for="">Hp</label>
+  <input type="text" class="form-control" [(ngModel)]="newPokemon.hp" />
+  <label for="">Cp</label>
+  <input type="text" class="form-control" [(ngModel)]="newPokemon.cp" />
+  <label for="">Picture</label>
+  <input type="text" class="form-control" [(ngModel)]="newPokemon.picture" />
+  <label for="">Type</label>
+  <input type="text" class="form-control" [(ngModel)]="newPokemon.type" />
+  <button class="btn btn-dark mt-2" (click)="onAddPokemon()">Ajouter</button>
+</section>
